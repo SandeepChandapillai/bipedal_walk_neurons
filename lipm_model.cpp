@@ -109,6 +109,7 @@ LIPM_model::LIPM_model()
     cortex->connect(2, 3);
     cortex->connect(3, 2);
 
+
     // Connection to left hip
     cortex->Neuron(7)->sensoryNeuron();
     cortex->Neuron(4)->flipNeuron(cortex->Neuron(7));

@@ -110,6 +110,26 @@ The handler should call this function again , until it returns a true..
 
 bool neuron::tick()
 {
+
+    if(__debug__) // PRINT OUT THE STATE OF THE SYSTEM
+    {
+        std::cout << " # INPUTS " << _nInputs << std::endl;
+        std::cout << " # OUTPUTS " << _nOutputs << std::endl;
+        std::cout << " # OUTPUTS TO SEND " << _nOutputsToSend<< std::endl;
+        std::cout << " # POTENTIAL " << _potential << std::endl;
+        std::cout << " ACTIVTIY " << _activity<< std::endl;
+        std::cout << " READY FOR TICK " << _readyForTick << std::endl;
+        std::cout << " THRESHOLD " << _threshold << std::endl;
+        std::cout << " OUTPUT BUFFER " << _outputBuffer << std::endl;
+        std::cout << " FORCE NERUON " << _forced << std::endl;
+        std::cout << " FLIP NERUON " << _forced << std::endl;
+    }
+
+
+
+
+
+
     if (_flip)
     {
         if (_nOutputs > 2) { debugN("ERROR : "); debug("FLIP Nueron can only have two inputs "); }
@@ -129,7 +149,6 @@ bool neuron::tick()
             // The remaining part of the functions handles the input of this neurons from other neurons other than the flip neuron
             // which are used in determining the potential..
             // flip is not added as an input neuron.. it is kept seperate..
-
             // Now that we have used obtianed the _flipNeuron's output. We will reset it ..
             _flipNueron->_readyForTick = false;
             _flipNueron->_outputBuffer = FLAT;
@@ -167,6 +186,7 @@ bool neuron::tick()
         {
             if (__debug__) {
                 debugN("TICKING  FAILED ");  debug("ID "); debug(_id);  debug("OUT "); debug(_outputBuffer); //debug(_potential);
+
             };
             _ticked = false; // FOR NETWORK USAGE ONLY
             return false; //
